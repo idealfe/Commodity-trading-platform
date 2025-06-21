@@ -1,0 +1,12 @@
+前台:
+http://localhost:8080/secondproductssm
+帐号: 0003  123
+
+
+注意： 前台的订单显示,当前用户订单信息 用户进入后台，
+查询的订单信息是自己发布商品，卖出的信息
+
+
+后台：
+http://localhost:8080/secondproductssm/admin/login.jsp
+帐号： admin  123
