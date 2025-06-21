@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.TousuDAO">
+    <resultMap type="com.entity.Tousu" id="BaseResultMap">
+      <id column="id" property="id" jdbcType="INTEGER"/>
+      <result column="memberid" property="memberid" jdbcType="INTEGER"/>
+      <result column="saverid" property="saverid" jdbcType="INTEGER"/>
+      <result column="productid" property="productid" jdbcType="INTEGER"/>
+      <result column="content" property="content" jdbcType="VARCHAR"/>
+      <result column="hfcontent" property="hfcontent" jdbcType="VARCHAR"/>
+      <result column="savetime" property="savetime" jdbcType="VARCHAR"/>
+    </resultMap>
+    
+    <select id="selectAll" parameterType="hashmap" resultMap="BaseResultMap">
+      select * from tousu where 1=1  
+      <if test="key!=null and key!=''">
+        and memberid in (select id from member where uname like "%"#{key}"%")
+      </if>
+      <if test="memberid!=null and memberid!='' and memberid!='0'.toString()">
+        and memberid=#{memberid}
+      </if>
+      order by id desc
+    </select>
+    
+    <insert id="add" parameterType="tousu">
+      insert into tousu values(null,#{memberid},#{saverid},#{productid},#{content},#{hfcontent},#{savetime} )
+    </insert>
+    
+    <select id="findById" parameterType="int" resultType="tousu">
+      select * from tousu where id=#{id}
+    </select>
+    
+    <update id="update" parameterType="tousu">
+      update tousu set hfcontent=#{hfcontent} where id=#{id}    
+    </update>
+    
+    <delete id="delete" parameterType="int">
+      delete from tousu where id=#{id}
+    </delete>
+    
+    
+    
+	
+</mapper>
+
